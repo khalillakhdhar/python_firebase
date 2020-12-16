@@ -1,0 +1,10 @@
+import firebase_admin
+from firebase_admin import credentials
+cred = credentials.Certificate("serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+firestore_db = firestore.client()
+firestore_db.collection(u'songs').add(
+    {'song': 'Imagine', 'artist': 'John Lennon'})
+snapshots = list(firestore_db.collection(u'songs').get())
+for snapshot in snapshots:
+    print(snapshot.to_dict())
